@@ -4,14 +4,14 @@ import { resolve } from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig(() => {
-  // npm run dev --project=one
-  // npm run build --project=one
-  const npm_config_project = process.env['npm_config_project']
-  if (!npm_config_project) {
+  const hasProject = process.argv.includes('--project')
+  if (!hasProject) {
     throw new Error(
-      '缺少指定模块!, 如果是构建指定模块，请使用 --project=[module_name]'
+      '缺少指定模块!, 如果是构建指定模块，请使用 --project [module_name]'
     )
   }
+  const projectIndex = process.argv.findIndex((v) => v === '--project') + 1
+  const npm_config_project = process.argv[projectIndex]
   // 入口文件
   const input = resolve(__dirname, `src/${npm_config_project}/index.html`)
 
