@@ -4,8 +4,8 @@ import { resolve } from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig(() => {
-  // npm run --project=one
-  // npm build --project=one
+  // npm run dev --project=one
+  // npm run build --project=one
   const npm_config_project = process.env['npm_config_project']
   if (!npm_config_project) {
     throw new Error(
